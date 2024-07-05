@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+     <% blogs.forEach(element => { %>
+         <h1><%= element.title %></h1>
+         <h4><%= element.createDate %></h4>
+         <a href="blog/list/<%= element._id %>">... see more</a>
+     <% }) %>
+</body>
+</html>

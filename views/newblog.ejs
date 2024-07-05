@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yeni Blog</title>
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <form id="createform">
+        <label for="username">Kullanıcı Adı</label>
+        <input type="text" name="username" id="username" required>
+        <label for="title">Başlık</label>
+        <input type="text" name="title" id="title" required>
+        <label for="content">İçerik</label>
+        <input type="text" name="content" id="content" required>
+        <button type="submit">Yayınla</button>
+    </form>
+    <p id="message" class="error"></p>
+
+    <script>
+        document.getElementById('createform').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const title = document.getElementById('title').value;
+            const content = document.getElementById('content').value;
+
+            const response = await fetch('/blog/newblog', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    username: username,
+                    title: title,
+                    content: content
+                })
+            });
+            console.log('fetchlendi');
+            const messageElement = document.getElementById('message');
+
+            if (response.status === 201) {
+                window.location = '/';
+            } else {
+                const data = await response.json();
+                messageElement.textContent = 'Lütfen geçerli bilgiler girin: ' + data.error;
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <% users.forEach(element => { %>
+        <div>
+            <%= element.username %>
+            <%= element.countofwrites %>
+            <a href="/user/list/<%= element._id %>">View Profile</a>
+        </div>
+    <% }) %>
+</body>
+</html>
